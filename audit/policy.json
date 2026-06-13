@@ -1,0 +1,43 @@
+{
+  "policy_id": "ab_factory_policy",
+  "policy_version": "1.0.0",
+  "updated_utc": "2026-02-18T00:00:00Z",
+  "primary_metric": {
+    "name": "revenue",
+    "direction": "up",
+    "practical_threshold_pct": 0.5
+  },
+  "significance": {
+    "alpha": 0.05,
+    "require_significance_for_ship": true,
+    "allow_investigate_if_not_significant": true
+  },
+  "guardrails": [
+    { "metric": "ctr", "direction": "down", "threshold_pct": -3.0, "severity": "hard" },
+    { "metric": "retention", "direction": "down", "threshold_pct": -2.0, "severity": "hard" }
+  ],
+  "segments": {
+    "enabled": true,
+    "min_abs_pct_gap_for_conflict": 2.0,
+    "conflict_action": "investigate"
+  },
+  "long_term": {
+    "enabled": true,
+    "reversal_threshold_pct": -0.8,
+    "reversal_action": "do_not_ship"
+  },
+  "confidence_model": {
+    "type": "linear_score_sigmoid",
+    "base": 0.0,
+    "weights": {
+      "primary_uplift_strong": 1.2,
+      "primary_uplift_small": -0.8,
+      "not_significant": -0.7,
+      "guardrail_hard_violation": -1.8,
+      "guardrail_soft_violation": -0.7,
+      "segment_conflict": -0.9,
+      "long_term_reversal": -1.0,
+      "evidence_sparse": -0.6
+    }
+  }
+}

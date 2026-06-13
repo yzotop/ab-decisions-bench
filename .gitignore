@@ -1,0 +1,16 @@
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# Results (raw outputs — large; commit summaries only)
+results/
+
+# macOS
+.DS_Store
