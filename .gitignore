@@ -12,5 +12,8 @@ venv/
 # Results (raw outputs — large; commit summaries only)
 results/
 
+# Corpus symlink (points at ab-factory-demo cases_auto)
+data/corpus
+
 # macOS
 .DS_Store

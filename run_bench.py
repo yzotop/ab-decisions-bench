@@ -5,8 +5,9 @@ Usage:
     python run_bench.py --limit 3        # smoke test (3 cases × 2 models)
     python run_bench.py                  # full run (100 × 2)
     python run_bench.py --reanalyse      # skip API, reload results/raw/*.jsonl
+    python run_bench.py --dry-run ...    # mock responses, no API
 
-Guard: exits with clear message if ANTHROPIC_API_KEY is not set.
+Guard: exits with clear message if ANTHROPIC_API_KEY is not set (skipped for --dry-run).
 """
 
 from __future__ import annotations
@@ -20,25 +21,21 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+from src.config import CORPUS_DIR, MODELS
+
 load_dotenv()
 
-# ── API key guard ─────────────────────────────────────────────────────────────
-_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "").strip()
-if not _API_KEY:
-    print(
-        "\n[ERROR] ANTHROPIC_API_KEY not set.\n"
-        "  1. Copy .env.example → .env\n"
-        "  2. Fill in your key.\n"
-        "  3. Re-run.\n"
-        "\nAll code compiled successfully — ready for smoke test once key is added."
-    )
-    sys.exit(1)
 
-# ── Imports (after key check) ────────────────────────────────────────────────
-from src.config import CORPUS_DIR, MODELS
-from src.runner import run_case
-from src.scoring import score_case
-from src.analysis import load_raw_jsonl, write_summary
+def _require_api_key() -> None:
+    if not os.environ.get("ANTHROPIC_API_KEY", "").strip():
+        print(
+            "\n[ERROR] ANTHROPIC_API_KEY not set.\n"
+            "  1. Copy .env.example → .env\n"
+            "  2. Fill in your key.\n"
+            "  3. Re-run.\n"
+            "\nAll code compiled successfully — ready for smoke test once key is added."
+        )
+        sys.exit(1)
 
 
 # ── JSONL helpers ────────────────────────────────────────────────────────────
@@ -68,9 +65,20 @@ def main() -> None:
     parser.add_argument("--models", nargs="+", default=MODELS)
     parser.add_argument("--mode", choices=["free", "sgr"], default="free",
                         help="Prompt mode: free-form or schema-guided reasoning")
+    parser.add_argument("--dry-run", action="store_true",
+                        help="Use mock responses from tests/fixtures (no API)")
     parser.add_argument("--reanalyse", action="store_true",
                         help="Skip API; load results/raw/*.jsonl and recompute")
     args = parser.parse_args()
+
+    if not args.dry_run and not args.reanalyse:
+        _require_api_key()
+
+    from src.runner import run_case
+    from src.scoring import score_case
+    from src.analysis import load_raw_jsonl, write_summary
+    if args.dry_run:
+        from tests.fixtures.mock_responses import mock_run_case
 
     raw_out = Path(args.raw_out)
     results_out = Path(args.results_out)
@@ -101,6 +109,8 @@ def main() -> None:
     print(f"Corpus : {corpus_path} ({len(case_dirs)} cases)")
     print(f"Models : {args.models}")
     print(f"Mode   : {args.mode}")
+    if args.dry_run:
+        print("Dry-run: mock responses (no API)")
     print(f"Raw out: {raw_out}")
     print()
 
@@ -118,7 +128,10 @@ def main() -> None:
         for model in args.models:
             print(f"  {case_dir.name} × {model} ...", end=" ", flush=True)
 
-            result = run_case(case_dir, model, mode=args.mode)
+            if args.dry_run:
+                result = mock_run_case(case_dir, model, mode=args.mode, truth=truth)
+            else:
+                result = run_case(case_dir, model, mode=args.mode)
             scored = score_case(result, truth)
             full = {**result, **scored}
 
