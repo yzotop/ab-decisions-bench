@@ -14,7 +14,7 @@ MODELS = [
 # Shared API call parameters
 API_PARAMS = {
     "max_tokens": 512,       # compact JSON response; ~300 tokens typical
-    "temperature": 0,        # deterministic for reproducibility
+    # temperature omitted — deprecated for claude-opus-4-8 (400 if passed)
 }
 
 # SGR reasoning is longer; 512 truncates JSON
