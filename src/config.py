@@ -31,8 +31,8 @@ VERDICT_SCHEMA = {
     "rationale": "one paragraph, <=120 words",
 }
 
-# Retry policy for JSON parse failures
-MAX_RETRIES = 2
+# Retry policy for JSON parse failures and transient API errors
+MAX_RETRIES = 4
 
 # False-confidence threshold: wrong_ship AND confidence >= this → false_confidence flag
 FC_THRESHOLD: float = 0.7
