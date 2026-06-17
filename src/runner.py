@@ -24,7 +24,15 @@ from .prompt import build_prompt
 
 load_dotenv()
 
+API_TIMEOUT_S = 60
+
 _client: anthropic.Anthropic | None = None
+
+_TRANSIENT_API_ERRORS = (
+    anthropic.APITimeoutError,
+    anthropic.APIConnectionError,
+    anthropic.RateLimitError,
+)
 
 
 def _get_client() -> anthropic.Anthropic:
@@ -120,6 +128,7 @@ def run_case(
                     "You are an expert A/B test analyst. "
                     "Always respond with ONLY a valid JSON object matching the requested schema."
                 ),
+                timeout=API_TIMEOUT_S,
                 **params,
             )
             latency_s = time.monotonic() - t0
@@ -143,6 +152,12 @@ def run_case(
                 "usage": usage,
             }
 
+        except _TRANSIENT_API_ERRORS as e:
+            last_error = e
+            if attempt < MAX_RETRIES:
+                time.sleep(2**attempt)
+            continue
+
         except (json.JSONDecodeError, ValueError) as e:
             last_error = e
             if attempt < MAX_RETRIES:
@@ -157,7 +172,7 @@ def run_case(
         "verdict": "parse_error",
         "mechanism": "none",
         "confidence": 0.0,
-        "rationale": f"Failed to parse after {MAX_RETRIES + 1} attempts: {last_error}",
+        "rationale": f"Failed after {MAX_RETRIES + 1} attempts: {last_error}",
         "raw_response": raw_response,
         "latency_s": -1.0,
         "retries": MAX_RETRIES,

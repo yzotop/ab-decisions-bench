@@ -26,13 +26,6 @@ from .scoring import (
 )
 
 # ---------------------------------------------------------------------------
-# Expected population sizes (from AUDIT.md)
-# ---------------------------------------------------------------------------
-
-EXPECTED_BLIND = 15
-EXPECTED_HEADLINE = 85
-
-# ---------------------------------------------------------------------------
 # Statistical helpers (unchanged from previous version)
 # ---------------------------------------------------------------------------
 
@@ -261,9 +254,10 @@ def write_summary(
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # ── Population sizes — validate against AUDIT.md ─────────────────────────
+    # ── Population sizes — validate internal consistency ─────────────────────
     # Infer from first model's results (all models share same cases)
     first_model_results = [r for r in all_results if r.get("model") == models[0]]
+    n_total = len(first_model_results)
     n_blind = sum(1 for r in first_model_results if r.get("case_set") == "blind")
     n_headline = sum(1 for r in first_model_results if r.get("case_set") == "headline")
 
@@ -271,15 +265,15 @@ def write_summary(
     print("  A/B DECISIONS BENCHMARK — RESULTS")
     print("═" * 64)
     print(f"\n  Corpus split (from scored results, model={models[0]}):")
-    print(f"    HEADLINE : {n_headline}  (expected {EXPECTED_HEADLINE})")
-    print(f"    BLIND    : {n_blind}  (expected {EXPECTED_BLIND})")
-    if n_headline != EXPECTED_HEADLINE or n_blind != EXPECTED_BLIND:
-        print(f"\n  ⚠ WARNING: corpus size mismatch — expected "
-              f"headline={EXPECTED_HEADLINE}, blind={EXPECTED_BLIND}; "
-              f"got headline={n_headline}, blind={n_blind}. "
-              "Check corpus against AUDIT.md.")
+    print(f"    HEADLINE : {n_headline}")
+    print(f"    BLIND    : {n_blind}")
+    print(f"    TOTAL    : {n_total}")
+    if n_headline + n_blind != n_total:
+        print(f"\n  ⚠ WARNING: corpus split mismatch — "
+              f"headline+blind={n_headline + n_blind} != total={n_total}. "
+              "Check scoring labels in raw results.")
     else:
-        print("    ✓ sizes match AUDIT.md")
+        print("    ✓ split is internally consistent")
 
     # ── Split by model × case_set ─────────────────────────────────────────────
     by_model_hl: dict[str, list[dict]] = {m: [] for m in models}

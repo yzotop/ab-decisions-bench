@@ -30,6 +30,7 @@ _TRUTH_MAP: dict[str, str] = {
 }
 
 VERDICT_LABELS = ("ship", "no_ship", "investigate")
+BLIND_REASONS = {"long_term_reversal", "novelty_effect"}
 
 
 def normalise_verdict(v: str) -> str:
@@ -46,14 +47,14 @@ normalise_truth_verdict = normalise_verdict
 # ---------------------------------------------------------------------------
 
 def is_blind(key_reasons: list[str]) -> bool:
-    """True if this case is a honesty-probe (reversal invisible in data)."""
-    return "long_term_reversal" in [r.lower() for r in key_reasons]
+    """True if this case is a honesty-probe (signal invisible in case data)."""
+    return any(r.lower() in BLIND_REASONS for r in key_reasons)
 
 
 def build_blind_set(corpus_path: Path) -> frozenset[str]:
     """
     Scan corpus and return frozenset of case_ids that are BLIND
-    (long_term_reversal in key_reasons).  Used for startup validation.
+    (any BLIND_REASONS in key_reasons). Used for startup validation.
     """
     blind: set[str] = set()
     for case_dir in sorted(corpus_path.iterdir()):
@@ -64,7 +65,7 @@ def build_blind_set(corpus_path: Path) -> frozenset[str]:
             continue
         truth = json.loads(tp.read_text(encoding="utf-8"))
         reasons = [r.lower() for r in truth.get("key_reasons", [])]
-        if "long_term_reversal" in reasons:
+        if any(r in BLIND_REASONS for r in reasons):
             blind.add(truth.get("case_id", case_dir.name))
     return frozenset(blind)
 
