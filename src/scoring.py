@@ -70,9 +70,12 @@ def build_blind_set(corpus_path: Path) -> frozenset[str]:
     return frozenset(blind)
 
 
-# ---------------------------------------------------------------------------
-# Per-case scoring
-# ---------------------------------------------------------------------------
+def antiship_correct(model_verdict: str, expected_verdict: str) -> bool:
+    """True if model would not ship invalid results (ignores no_ship vs investigate)."""
+    if expected_verdict == "ship":
+        return model_verdict == "ship"
+    return model_verdict in ("no_ship", "investigate")
+
 
 def score_case(model_output: dict, truth: dict) -> dict:
     """
@@ -87,7 +90,8 @@ def score_case(model_output: dict, truth: dict) -> dict:
         key_reasons      list   lowercased key_reasons from truth
 
     HEADLINE only:
-        correct          bool   3-way exact match
+        correct          bool   3-way exact match (strict)
+        antiship_correct bool   ship iff expected ship; else no_ship or investigate
         wrong_ship       bool   expected != ship AND verdict == ship
         false_confidence bool   wrong_ship AND confidence >= FC_THRESHOLD
         mechanism_hit    bool|None
@@ -125,6 +129,7 @@ def score_case(model_output: dict, truth: dict) -> dict:
         }
     else:
         correct = model_verdict == expected_verdict
+        antiship = antiship_correct(model_verdict, expected_verdict)
         wrong_ship = (expected_verdict != "ship") and (model_verdict == "ship")
         false_confidence = wrong_ship and confidence >= FC_THRESHOLD
         # mechanism_hit only meaningful when there IS a visible trap
@@ -137,6 +142,7 @@ def score_case(model_output: dict, truth: dict) -> dict:
             "expected_verdict": expected_verdict,
             "key_reasons": key_reasons,
             "correct": correct,
+            "antiship_correct": antiship,
             "wrong_ship": wrong_ship,
             "false_confidence": false_confidence,
             "mechanism_hit": mechanism_hit,
@@ -158,6 +164,7 @@ def aggregate_headline(results: list[dict]) -> dict:
 
     n = len(results)
     n_correct = sum(r["correct"] for r in results)
+    n_antiship = sum(r["antiship_correct"] for r in results)
     n_wrong_ship = sum(r["wrong_ship"] for r in results)
     n_false_conf = sum(r["false_confidence"] for r in results)
 
@@ -166,19 +173,25 @@ def aggregate_headline(results: list[dict]) -> dict:
     for ev in VERDICT_LABELS:
         sub = [r for r in results if r["expected_verdict"] == ev]
         nc = sum(r["correct"] for r in sub)
-        by_verdict[ev] = {"n": len(sub), "n_correct": nc,
-                           "accuracy": nc / len(sub) if sub else None}
+        na = sum(r["antiship_correct"] for r in sub)
+        by_verdict[ev] = {
+            "n": len(sub), "n_correct": nc, "n_antiship_correct": na,
+            "accuracy": nc / len(sub) if sub else None,
+            "antiship_accuracy": na / len(sub) if sub else None,
+        }
 
     # Per-trap accuracy (multi-label — each case counted under each of its reasons)
     trap_stats: dict[str, dict] = {}
     for r in results:
         for trap in r["key_reasons"]:
             if trap not in trap_stats:
-                trap_stats[trap] = {"n": 0, "n_correct": 0}
+                trap_stats[trap] = {"n": 0, "n_correct": 0, "n_antiship_correct": 0}
             trap_stats[trap]["n"] += 1
             trap_stats[trap]["n_correct"] += int(r["correct"])
+            trap_stats[trap]["n_antiship_correct"] += int(r["antiship_correct"])
     for d in trap_stats.values():
         d["accuracy"] = d["n_correct"] / d["n"] if d["n"] else None
+        d["antiship_accuracy"] = d["n_antiship_correct"] / d["n"] if d["n"] else None
 
     # Mechanism recall — only on no_ship / investigate cases
     recall_base = [r for r in results if r["expected_verdict"] != "ship"]
@@ -201,7 +214,9 @@ def aggregate_headline(results: list[dict]) -> dict:
     return {
         "n": n,
         "accuracy": n_correct / n,
+        "antiship_accuracy": n_antiship / n,
         "n_correct": n_correct,
+        "n_antiship_correct": n_antiship,
         "wrong_ship_rate": n_wrong_ship / n,
         "false_confidence_rate": n_false_conf / n,
         "n_wrong_ship": n_wrong_ship,

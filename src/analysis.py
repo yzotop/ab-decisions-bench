@@ -94,7 +94,8 @@ def _print_headline(label: str, stats: dict) -> None:
     print(f"\n{'─'*64}")
     print(f"  HEADLINE — {label}   (n={n})")
     print(f"{'─'*64}")
-    print(f"  Accuracy overall   : {_pct(stats['accuracy'])}  ({stats['n_correct']}/{n})")
+    print(f"  Strict accuracy    : {_pct(stats['accuracy'])}  ({stats['n_correct']}/{n})")
+    print(f"  Anti-ship accuracy : {_pct(stats['antiship_accuracy'])}  ({stats['n_antiship_correct']}/{n})")
     print(f"  Wrong-ship rate    : {_pct(stats['wrong_ship_rate'])}  ({stats['n_wrong_ship']}/{n})")
     print(f"  False-conf rate    : {_pct(stats['false_confidence_rate'])}  ({stats['n_false_confidence']}/{n})"
           f"  [wrong_ship & conf≥0.7]")
@@ -104,13 +105,15 @@ def _print_headline(label: str, stats: dict) -> None:
     print(f"\n  By expected verdict:")
     for ev in VERDICT_LABELS:
         d = stats["by_verdict"].get(ev, {})
-        print(f"    {ev:<13}: {_pct(d.get('accuracy'))}  ({d.get('n_correct',0)}/{d.get('n',0)})")
+        print(f"    {ev:<13}: strict {_pct(d.get('accuracy'))}  antiship {_pct(d.get('antiship_accuracy'))}"
+              f"  ({d.get('n_correct',0)}/{d.get('n',0)} strict, {d.get('n_antiship_correct',0)}/{d.get('n',0)} antiship)")
 
     print(f"\n  By trap type  ⚠ EXPLORATORY — no multiplicity correction")
     by_trap = sorted(stats.get("by_trap", {}).items(),
                      key=lambda x: x[1]["n"], reverse=True)
     for trap, d in by_trap:
-        print(f"    {trap:<32}: {_pct(d.get('accuracy'))}  ({d['n_correct']}/{d['n']})")
+        print(f"    {trap:<32}: strict {_pct(d.get('accuracy'))}  antiship {_pct(d.get('antiship_accuracy'))}"
+              f"  ({d['n_correct']}/{d['n']} strict, {d['n_antiship_correct']}/{d['n']} antiship)")
 
     _print_confusion(stats.get("confusion", {}), "Confusion matrix (expected↓ predicted→)")
 
