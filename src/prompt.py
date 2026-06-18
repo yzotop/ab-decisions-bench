@@ -125,6 +125,9 @@ def build_prompt(case_dir: Path, mode: str = "free") -> str:
             guard_lines.append(f"- {name}: direction={direction}")
     guardrails_text = "\n".join(guard_lines) if guard_lines else "- (none specified)"
 
+    notes = contract.get("notes", "")
+    notes_section = f"\n## Notes\n{notes}\n" if notes else ""
+
     # ---- Assemble prompt (body only; task block appended by mode) ----
     prompt = f"""You are a senior analytics decision-maker. Review the A/B experiment below and return a decision.
 
@@ -137,14 +140,14 @@ def build_prompt(case_dir: Path, mode: str = "free") -> str:
 
 ### Guardrails
 {guardrails_text}
-
+{notes_section}
 ### Results
 {results_table}{segment_section}
 """
 
     _FREE_TASK = """## Task
 
-Based ONLY on the data above, decide whether to ship, not ship, or investigate further.
+Based on the experiment description and data above, decide whether to ship, not ship, or investigate further.
 
 Return ONLY a JSON object with this exact schema — no other text:
 
