@@ -1,0 +1,301 @@
+{
+  "corpus": {
+    "headline": 295,
+    "blind": 35
+  },
+  "headline": {
+    "mlx-community/Qwen2.5-7B-Instruct-4bit": {
+      "n": 295,
+      "accuracy": 0.31186440677966104,
+      "antiship_accuracy": 0.5288135593220339,
+      "n_correct": 92,
+      "n_antiship_correct": 156,
+      "wrong_ship_rate": 0.46440677966101696,
+      "false_confidence_rate": 0.46440677966101696,
+      "n_wrong_ship": 137,
+      "n_false_confidence": 137,
+      "mechanism_recall": 0.13333333333333333,
+      "by_verdict": {
+        "ship": {
+          "n": 10,
+          "n_correct": 8,
+          "n_antiship_correct": 8,
+          "accuracy": 0.8,
+          "antiship_accuracy": 0.8
+        },
+        "no_ship": {
+          "n": 69,
+          "n_correct": 45,
+          "n_antiship_correct": 54,
+          "accuracy": 0.6521739130434783,
+          "antiship_accuracy": 0.782608695652174
+        },
+        "investigate": {
+          "n": 216,
+          "n_correct": 39,
+          "n_antiship_correct": 94,
+          "accuracy": 0.18055555555555555,
+          "antiship_accuracy": 0.4351851851851852
+        }
+      },
+      "by_trap": {
+        "underpowered": {
+          "n": 9,
+          "n_correct": 2,
+          "n_antiship_correct": 9,
+          "accuracy": 0.2222222222222222,
+          "antiship_accuracy": 1.0
+        },
+        "not_significant": {
+          "n": 29,
+          "n_correct": 14,
+          "n_antiship_correct": 29,
+          "accuracy": 0.4827586206896552,
+          "antiship_accuracy": 1.0
+        },
+        "cuped_missing": {
+          "n": 11,
+          "n_correct": 8,
+          "n_antiship_correct": 11,
+          "accuracy": 0.7272727272727273,
+          "antiship_accuracy": 1.0
+        },
+        "primary_uplift": {
+          "n": 21,
+          "n_correct": 19,
+          "n_antiship_correct": 19,
+          "accuracy": 0.9047619047619048,
+          "antiship_accuracy": 0.9047619047619048
+        },
+        "guardrail_violation": {
+          "n": 11,
+          "n_correct": 11,
+          "n_antiship_correct": 11,
+          "accuracy": 1.0,
+          "antiship_accuracy": 1.0
+        },
+        "winners_curse": {
+          "n": 9,
+          "n_correct": 9,
+          "n_antiship_correct": 9,
+          "accuracy": 1.0,
+          "antiship_accuracy": 1.0
+        },
+        "harking": {
+          "n": 9,
+          "n_correct": 0,
+          "n_antiship_correct": 9,
+          "accuracy": 0.0,
+          "antiship_accuracy": 1.0
+        },
+        "segment_conflict": {
+          "n": 10,
+          "n_correct": 2,
+          "n_antiship_correct": 10,
+          "accuracy": 0.2,
+          "antiship_accuracy": 1.0
+        },
+        "heterogeneity": {
+          "n": 10,
+          "n_correct": 7,
+          "n_antiship_correct": 10,
+          "accuracy": 0.7,
+          "antiship_accuracy": 1.0
+        },
+        "external_shock": {
+          "n": 8,
+          "n_correct": 3,
+          "n_antiship_correct": 3,
+          "accuracy": 0.375,
+          "antiship_accuracy": 0.375
+        },
+        "logging_bug": {
+          "n": 10,
+          "n_correct": 1,
+          "n_antiship_correct": 1,
+          "accuracy": 0.1,
+          "antiship_accuracy": 0.1
+        },
+        "seasonality": {
+          "n": 8,
+          "n_correct": 2,
+          "n_antiship_correct": 2,
+          "accuracy": 0.25,
+          "antiship_accuracy": 0.25
+        },
+        "practically_small": {
+          "n": 10,
+          "n_correct": 10,
+          "n_antiship_correct": 10,
+          "accuracy": 1.0,
+          "antiship_accuracy": 1.0
+        },
+        "bad_oec": {
+          "n": 11,
+          "n_correct": 11,
+          "n_antiship_correct": 11,
+          "accuracy": 1.0,
+          "antiship_accuracy": 1.0
+        },
+        "missing_data": {
+          "n": 10,
+          "n_correct": 0,
+          "n_antiship_correct": 0,
+          "accuracy": 0.0,
+          "antiship_accuracy": 0.0
+        },
+        "interference": {
+          "n": 8,
+          "n_correct": 0,
+          "n_antiship_correct": 5,
+          "accuracy": 0.0,
+          "antiship_accuracy": 0.625
+        },
+        "ratio_metric": {
+          "n": 10,
+          "n_correct": 0,
+          "n_antiship_correct": 0,
+          "accuracy": 0.0,
+          "antiship_accuracy": 0.0
+        },
+        "peeking": {
+          "n": 9,
+          "n_correct": 0,
+          "n_antiship_correct": 0,
+          "accuracy": 0.0,
+          "antiship_accuracy": 0.0
+        },
+        "bots": {
+          "n": 11,
+          "n_correct": 2,
+          "n_antiship_correct": 3,
+          "accuracy": 0.18181818181818182,
+          "antiship_accuracy": 0.2727272727272727
+        },
+        "posttreatment_selection": {
+          "n": 9,
+          "n_correct": 0,
+          "n_antiship_correct": 0,
+          "accuracy": 0.0,
+          "antiship_accuracy": 0.0
+        },
+        "simpson_paradox": {
+          "n": 9,
+          "n_correct": 0,
+          "n_antiship_correct": 9,
+          "accuracy": 0.0,
+          "antiship_accuracy": 1.0
+        },
+        "srm": {
+          "n": 10,
+          "n_correct": 0,
+          "n_antiship_correct": 0,
+          "accuracy": 0.0,
+          "antiship_accuracy": 0.0
+        },
+        "multiple_comparisons": {
+          "n": 10,
+          "n_correct": 10,
+          "n_antiship_correct": 10,
+          "accuracy": 1.0,
+          "antiship_accuracy": 1.0
+        },
+        "heavy_tails": {
+          "n": 11,
+          "n_correct": 3,
+          "n_antiship_correct": 3,
+          "accuracy": 0.2727272727272727,
+          "antiship_accuracy": 0.2727272727272727
+        },
+        "twyman": {
+          "n": 7,
+          "n_correct": 0,
+          "n_antiship_correct": 0,
+          "accuracy": 0.0,
+          "antiship_accuracy": 0.0
+        },
+        "unit_randomization": {
+          "n": 10,
+          "n_correct": 0,
+          "n_antiship_correct": 0,
+          "accuracy": 0.0,
+          "antiship_accuracy": 0.0
+        },
+        "incomplete_cycles": {
+          "n": 8,
+          "n_correct": 0,
+          "n_antiship_correct": 0,
+          "accuracy": 0.0,
+          "antiship_accuracy": 0.0
+        },
+        "narrow_generalization": {
+          "n": 8,
+          "n_correct": 0,
+          "n_antiship_correct": 0,
+          "accuracy": 0.0,
+          "antiship_accuracy": 0.0
+        },
+        "longterm_value": {
+          "n": 9,
+          "n_correct": 3,
+          "n_antiship_correct": 3,
+          "accuracy": 0.3333333333333333,
+          "antiship_accuracy": 0.3333333333333333
+        },
+        "contamination": {
+          "n": 11,
+          "n_correct": 0,
+          "n_antiship_correct": 11,
+          "accuracy": 0.0,
+          "antiship_accuracy": 1.0
+        },
+        "event_duplication": {
+          "n": 11,
+          "n_correct": 0,
+          "n_antiship_correct": 0,
+          "accuracy": 0.0,
+          "antiship_accuracy": 0.0
+        },
+        "dilution": {
+          "n": 8,
+          "n_correct": 0,
+          "n_antiship_correct": 8,
+          "accuracy": 0.0,
+          "antiship_accuracy": 1.0
+        }
+      },
+      "confusion": {
+        "ship": {
+          "ship": 8,
+          "no_ship": 2,
+          "investigate": 0
+        },
+        "no_ship": {
+          "ship": 15,
+          "no_ship": 45,
+          "investigate": 9
+        },
+        "investigate": {
+          "ship": 122,
+          "no_ship": 55,
+          "investigate": 39
+        }
+      }
+    }
+  },
+  "honesty_probe": {
+    "mlx-community/Qwen2.5-7B-Instruct-4bit": {
+      "n": 35,
+      "did_not_ship_rate": 1.0,
+      "wrong_ship_rate": 0.0,
+      "false_confidence_rate": 0.0,
+      "claimed_reversal_rate": 0.5714285714285714,
+      "mean_confidence": 0.7657,
+      "n_did_not_ship": 35,
+      "n_wrong_ship": 0,
+      "n_false_confidence": 0,
+      "n_claimed_reversal": 20
+    }
+  },
+  "pairwise": {}
+}

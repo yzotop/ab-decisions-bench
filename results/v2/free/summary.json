@@ -1,0 +1,242 @@
+{
+  "corpus": {
+    "headline": 240,
+    "blind": 60
+  },
+  "headline": {
+    "claude-sonnet-4-6": {
+      "n": 240,
+      "accuracy": 0.7791666666666667,
+      "n_correct": 187,
+      "wrong_ship_rate": 0.004166666666666667,
+      "false_confidence_rate": 0.004166666666666667,
+      "n_wrong_ship": 1,
+      "n_false_confidence": 1,
+      "mechanism_recall": 0.8505747126436781,
+      "by_verdict": {
+        "ship": {
+          "n": 66,
+          "n_correct": 63,
+          "accuracy": 0.9545454545454546
+        },
+        "no_ship": {
+          "n": 126,
+          "n_correct": 92,
+          "accuracy": 0.7301587301587301
+        },
+        "investigate": {
+          "n": 48,
+          "n_correct": 32,
+          "accuracy": 0.6666666666666666
+        }
+      },
+      "by_trap": {
+        "primary_uplift": {
+          "n": 108,
+          "n_correct": 105,
+          "accuracy": 0.9722222222222222
+        },
+        "guardrail_violation": {
+          "n": 42,
+          "n_correct": 42,
+          "accuracy": 1.0
+        },
+        "simpson_paradox": {
+          "n": 24,
+          "n_correct": 0,
+          "accuracy": 0.0
+        },
+        "practically_small": {
+          "n": 36,
+          "n_correct": 26,
+          "accuracy": 0.7222222222222222
+        },
+        "underpowered": {
+          "n": 18,
+          "n_correct": 2,
+          "accuracy": 0.1111111111111111
+        },
+        "not_significant": {
+          "n": 72,
+          "n_correct": 56,
+          "accuracy": 0.7777777777777778
+        },
+        "segment_conflict": {
+          "n": 30,
+          "n_correct": 30,
+          "accuracy": 1.0
+        },
+        "multiple_comparisons": {
+          "n": 24,
+          "n_correct": 24,
+          "accuracy": 1.0
+        }
+      },
+      "confusion": {
+        "ship": {
+          "ship": 63,
+          "no_ship": 0,
+          "investigate": 3
+        },
+        "no_ship": {
+          "ship": 1,
+          "no_ship": 92,
+          "investigate": 33
+        },
+        "investigate": {
+          "ship": 0,
+          "no_ship": 16,
+          "investigate": 32
+        }
+      }
+    },
+    "claude-haiku-4-5-20251001": {
+      "n": 240,
+      "accuracy": 0.8,
+      "n_correct": 192,
+      "wrong_ship_rate": 0.0,
+      "false_confidence_rate": 0.0,
+      "n_wrong_ship": 0,
+      "n_false_confidence": 0,
+      "mechanism_recall": 0.8620689655172413,
+      "by_verdict": {
+        "ship": {
+          "n": 66,
+          "n_correct": 63,
+          "accuracy": 0.9545454545454546
+        },
+        "no_ship": {
+          "n": 126,
+          "n_correct": 100,
+          "accuracy": 0.7936507936507936
+        },
+        "investigate": {
+          "n": 48,
+          "n_correct": 29,
+          "accuracy": 0.6041666666666666
+        }
+      },
+      "by_trap": {
+        "primary_uplift": {
+          "n": 108,
+          "n_correct": 105,
+          "accuracy": 0.9722222222222222
+        },
+        "guardrail_violation": {
+          "n": 42,
+          "n_correct": 42,
+          "accuracy": 1.0
+        },
+        "simpson_paradox": {
+          "n": 24,
+          "n_correct": 7,
+          "accuracy": 0.2916666666666667
+        },
+        "practically_small": {
+          "n": 36,
+          "n_correct": 27,
+          "accuracy": 0.75
+        },
+        "underpowered": {
+          "n": 18,
+          "n_correct": 0,
+          "accuracy": 0.0
+        },
+        "not_significant": {
+          "n": 72,
+          "n_correct": 53,
+          "accuracy": 0.7361111111111112
+        },
+        "segment_conflict": {
+          "n": 30,
+          "n_correct": 29,
+          "accuracy": 0.9666666666666667
+        },
+        "multiple_comparisons": {
+          "n": 24,
+          "n_correct": 24,
+          "accuracy": 1.0
+        }
+      },
+      "confusion": {
+        "ship": {
+          "ship": 63,
+          "no_ship": 0,
+          "investigate": 3
+        },
+        "no_ship": {
+          "ship": 0,
+          "no_ship": 100,
+          "investigate": 26
+        },
+        "investigate": {
+          "ship": 0,
+          "no_ship": 19,
+          "investigate": 29
+        }
+      }
+    }
+  },
+  "honesty_probe": {
+    "claude-sonnet-4-6": {
+      "n": 60,
+      "did_not_ship_rate": 0.5,
+      "wrong_ship_rate": 0.5,
+      "false_confidence_rate": 0.5,
+      "claimed_reversal_rate": 0.0,
+      "mean_confidence": 0.8695,
+      "n_did_not_ship": 30,
+      "n_wrong_ship": 30,
+      "n_false_confidence": 30,
+      "n_claimed_reversal": 0
+    },
+    "claude-haiku-4-5-20251001": {
+      "n": 60,
+      "did_not_ship_rate": 0.5,
+      "wrong_ship_rate": 0.5,
+      "false_confidence_rate": 0.5,
+      "claimed_reversal_rate": 0.0,
+      "mean_confidence": 0.9265,
+      "n_did_not_ship": 30,
+      "n_wrong_ship": 30,
+      "n_false_confidence": 30,
+      "n_claimed_reversal": 0
+    }
+  },
+  "pairwise": {
+    "headline": {
+      "n_common": 240,
+      "accuracy": {
+        "claude-sonnet-4-6": 0.7792,
+        "claude-haiku-4-5-20251001": 0.8
+      },
+      "verdict_mcnemar": {
+        "b": 4,
+        "c": 9,
+        "stat": 1.2308,
+        "p_value": 0.267257
+      },
+      "verdict_bootstrap": {
+        "interpretation": "claude-sonnet-4-6−claude-haiku-4-5-20251001 = -0.0208 [-0.0500, +0.0083]"
+      },
+      "fc_mcnemar": {
+        "b": 1,
+        "c": 0,
+        "stat": 0.0,
+        "p_value": 1.0
+      },
+      "fc_bootstrap": {
+        "interpretation": "claude-sonnet-4-6−claude-haiku-4-5-20251001 = +0.0042 [+0.0000, +0.0125]"
+      }
+    },
+    "honesty_probe": {
+      "n_common": 60,
+      "fc_bootstrap": {
+        "interpretation": "claude-sonnet-4-6−claude-haiku-4-5-20251001 = +0.0000 [+0.0000, +0.0000]"
+      },
+      "conf_bootstrap": {
+        "interpretation": "claude-sonnet-4-6−claude-haiku-4-5-20251001 = -0.0570 [-0.0648, -0.0492]"
+      }
+    }
+  }
+}

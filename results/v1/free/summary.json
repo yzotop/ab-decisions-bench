@@ -1,0 +1,343 @@
+{
+  "corpus": {
+    "headline": 85,
+    "blind": 15
+  },
+  "headline": {
+    "claude-opus-4-8": {
+      "n": 85,
+      "accuracy": 0.9764705882352941,
+      "n_correct": 83,
+      "wrong_ship_rate": 0.0,
+      "false_confidence_rate": 0.0,
+      "n_wrong_ship": 0,
+      "n_false_confidence": 0,
+      "mechanism_recall": 1.0,
+      "by_verdict": {
+        "ship": {
+          "n": 30,
+          "n_correct": 30,
+          "accuracy": 1.0
+        },
+        "no_ship": {
+          "n": 40,
+          "n_correct": 40,
+          "accuracy": 1.0
+        },
+        "investigate": {
+          "n": 15,
+          "n_correct": 13,
+          "accuracy": 0.8666666666666667
+        }
+      },
+      "by_trap": {
+        "primary_uplift": {
+          "n": 50,
+          "n_correct": 50,
+          "accuracy": 1.0
+        },
+        "guardrail_violation": {
+          "n": 20,
+          "n_correct": 20,
+          "accuracy": 1.0
+        },
+        "practically_small": {
+          "n": 20,
+          "n_correct": 20,
+          "accuracy": 1.0
+        },
+        "segment_conflict": {
+          "n": 15,
+          "n_correct": 13,
+          "accuracy": 0.8666666666666667
+        },
+        "not_significant": {
+          "n": 15,
+          "n_correct": 13,
+          "accuracy": 0.8666666666666667
+        }
+      },
+      "confusion": {
+        "ship": {
+          "ship": 30,
+          "no_ship": 0,
+          "investigate": 0
+        },
+        "no_ship": {
+          "ship": 0,
+          "no_ship": 40,
+          "investigate": 0
+        },
+        "investigate": {
+          "ship": 0,
+          "no_ship": 2,
+          "investigate": 13
+        }
+      }
+    },
+    "claude-opus-4-7": {
+      "n": 85,
+      "accuracy": 0.9647058823529412,
+      "n_correct": 82,
+      "wrong_ship_rate": 0.023529411764705882,
+      "false_confidence_rate": 0.023529411764705882,
+      "n_wrong_ship": 2,
+      "n_false_confidence": 2,
+      "mechanism_recall": 0.9636363636363636,
+      "by_verdict": {
+        "ship": {
+          "n": 30,
+          "n_correct": 29,
+          "accuracy": 0.9666666666666667
+        },
+        "no_ship": {
+          "n": 40,
+          "n_correct": 38,
+          "accuracy": 0.95
+        },
+        "investigate": {
+          "n": 15,
+          "n_correct": 15,
+          "accuracy": 1.0
+        }
+      },
+      "by_trap": {
+        "primary_uplift": {
+          "n": 50,
+          "n_correct": 49,
+          "accuracy": 0.98
+        },
+        "guardrail_violation": {
+          "n": 20,
+          "n_correct": 20,
+          "accuracy": 1.0
+        },
+        "practically_small": {
+          "n": 20,
+          "n_correct": 18,
+          "accuracy": 0.9
+        },
+        "segment_conflict": {
+          "n": 15,
+          "n_correct": 15,
+          "accuracy": 1.0
+        },
+        "not_significant": {
+          "n": 15,
+          "n_correct": 15,
+          "accuracy": 1.0
+        }
+      },
+      "confusion": {
+        "ship": {
+          "ship": 29,
+          "no_ship": 0,
+          "investigate": 1
+        },
+        "no_ship": {
+          "ship": 2,
+          "no_ship": 38,
+          "investigate": 0
+        },
+        "investigate": {
+          "ship": 0,
+          "no_ship": 0,
+          "investigate": 15
+        }
+      }
+    },
+    "claude-sonnet-4-6": {
+      "n": 85,
+      "accuracy": 0.9294117647058824,
+      "n_correct": 79,
+      "wrong_ship_rate": 0.0,
+      "false_confidence_rate": 0.0,
+      "n_wrong_ship": 0,
+      "n_false_confidence": 0,
+      "mechanism_recall": 1.0,
+      "by_verdict": {
+        "ship": {
+          "n": 30,
+          "n_correct": 28,
+          "accuracy": 0.9333333333333333
+        },
+        "no_ship": {
+          "n": 40,
+          "n_correct": 36,
+          "accuracy": 0.9
+        },
+        "investigate": {
+          "n": 15,
+          "n_correct": 15,
+          "accuracy": 1.0
+        }
+      },
+      "by_trap": {
+        "primary_uplift": {
+          "n": 50,
+          "n_correct": 48,
+          "accuracy": 0.96
+        },
+        "guardrail_violation": {
+          "n": 20,
+          "n_correct": 20,
+          "accuracy": 1.0
+        },
+        "practically_small": {
+          "n": 20,
+          "n_correct": 16,
+          "accuracy": 0.8
+        },
+        "segment_conflict": {
+          "n": 15,
+          "n_correct": 15,
+          "accuracy": 1.0
+        },
+        "not_significant": {
+          "n": 15,
+          "n_correct": 15,
+          "accuracy": 1.0
+        }
+      },
+      "confusion": {
+        "ship": {
+          "ship": 28,
+          "no_ship": 0,
+          "investigate": 2
+        },
+        "no_ship": {
+          "ship": 0,
+          "no_ship": 36,
+          "investigate": 4
+        },
+        "investigate": {
+          "ship": 0,
+          "no_ship": 0,
+          "investigate": 15
+        }
+      }
+    },
+    "claude-haiku-4-5-20251001": {
+      "n": 85,
+      "accuracy": 0.8941176470588236,
+      "n_correct": 76,
+      "wrong_ship_rate": 0.0,
+      "false_confidence_rate": 0.0,
+      "n_wrong_ship": 0,
+      "n_false_confidence": 0,
+      "mechanism_recall": 1.0,
+      "by_verdict": {
+        "ship": {
+          "n": 30,
+          "n_correct": 28,
+          "accuracy": 0.9333333333333333
+        },
+        "no_ship": {
+          "n": 40,
+          "n_correct": 33,
+          "accuracy": 0.825
+        },
+        "investigate": {
+          "n": 15,
+          "n_correct": 15,
+          "accuracy": 1.0
+        }
+      },
+      "by_trap": {
+        "primary_uplift": {
+          "n": 50,
+          "n_correct": 48,
+          "accuracy": 0.96
+        },
+        "guardrail_violation": {
+          "n": 20,
+          "n_correct": 20,
+          "accuracy": 1.0
+        },
+        "practically_small": {
+          "n": 20,
+          "n_correct": 13,
+          "accuracy": 0.65
+        },
+        "segment_conflict": {
+          "n": 15,
+          "n_correct": 15,
+          "accuracy": 1.0
+        },
+        "not_significant": {
+          "n": 15,
+          "n_correct": 15,
+          "accuracy": 1.0
+        }
+      },
+      "confusion": {
+        "ship": {
+          "ship": 28,
+          "no_ship": 1,
+          "investigate": 1
+        },
+        "no_ship": {
+          "ship": 0,
+          "no_ship": 33,
+          "investigate": 7
+        },
+        "investigate": {
+          "ship": 0,
+          "no_ship": 0,
+          "investigate": 15
+        }
+      }
+    }
+  },
+  "honesty_probe": {
+    "claude-opus-4-8": {
+      "n": 15,
+      "did_not_ship_rate": 1.0,
+      "wrong_ship_rate": 0.0,
+      "false_confidence_rate": 0.0,
+      "claimed_reversal_rate": 0.0,
+      "mean_confidence": 0.8533,
+      "n_did_not_ship": 15,
+      "n_wrong_ship": 0,
+      "n_false_confidence": 0,
+      "n_claimed_reversal": 0
+    },
+    "claude-opus-4-7": {
+      "n": 15,
+      "did_not_ship_rate": 1.0,
+      "wrong_ship_rate": 0.0,
+      "false_confidence_rate": 0.0,
+      "claimed_reversal_rate": 0.0,
+      "mean_confidence": 0.8153,
+      "n_did_not_ship": 15,
+      "n_wrong_ship": 0,
+      "n_false_confidence": 0,
+      "n_claimed_reversal": 0
+    },
+    "claude-sonnet-4-6": {
+      "n": 15,
+      "did_not_ship_rate": 1.0,
+      "wrong_ship_rate": 0.0,
+      "false_confidence_rate": 0.0,
+      "claimed_reversal_rate": 0.0,
+      "mean_confidence": 0.8493,
+      "n_did_not_ship": 15,
+      "n_wrong_ship": 0,
+      "n_false_confidence": 0,
+      "n_claimed_reversal": 0
+    },
+    "claude-haiku-4-5-20251001": {
+      "n": 15,
+      "did_not_ship_rate": 1.0,
+      "wrong_ship_rate": 0.0,
+      "false_confidence_rate": 0.0,
+      "claimed_reversal_rate": 0.0,
+      "mean_confidence": 0.924,
+      "n_did_not_ship": 15,
+      "n_wrong_ship": 0,
+      "n_false_confidence": 0,
+      "n_claimed_reversal": 0
+    }
+  },
+  "pairwise": {}
+}

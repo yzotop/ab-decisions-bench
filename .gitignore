@@ -9,8 +9,19 @@ __pycache__/
 venv/
 *.egg-info/
 
-# Results (raw outputs — large; commit summaries only)
-results/
+# Results: ignore all, except provenance + aggregates (not raw JSONL)
+results/**
+!results/**/
+!results/**/run_manifest.json
+!results/**/summary.json
+!results/**/calib_summary.json
+!results/**/zone_calib.json
+!results/**/reliability*.csv
+!results/**/free_vs_sgr.json
+results/_archive/**
+results/gemma_calib330/blind_probe/**
+results/gemma_calib330/calib20_selfconf/**
+results/gemma_calib330/raw_blind_probe/**
 
 # Corpus symlink (points at ab-factory-demo cases_auto)
 data/corpus

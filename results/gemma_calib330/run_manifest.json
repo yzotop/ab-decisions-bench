@@ -1,0 +1,12 @@
+{
+  "model": "mlx-community/gemma-2-9b-it-4bit",
+  "backend": "mlx",
+  "quant": "4bit",
+  "mode": "free",
+  "n_cases": 330,
+  "confidence_signal": "self_reported",
+  "temperature": 0.7,
+  "corpus": "cases_mvp_v2 + data/calib330_cases.json",
+  "notes": "headline=295, blind=35; raw/mlx_community_gemma_2_9b_it_4bit.jsonl",
+  "subdirs_note": "blind_probe/, calib20_selfconf/, raw_blind_probe/ — промежуточные отладочные, не входят в основной 330"
+}

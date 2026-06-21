@@ -1,0 +1,11 @@
+{
+  "model": "claude-opus-4-8, claude-opus-4-7, claude-sonnet-4-6, claude-haiku-4-5-20251001",
+  "backend": "anthropic-api",
+  "quant": "none",
+  "mode": "sgr",
+  "n_cases": 100,
+  "confidence_signal": "self_reported",
+  "temperature": "not passed",
+  "corpus": "cases_auto",
+  "notes": "headline=85, blind=15 per model; 4 models × 100 cases; temperature omitted in API_PARAMS (Anthropic default)"
+}

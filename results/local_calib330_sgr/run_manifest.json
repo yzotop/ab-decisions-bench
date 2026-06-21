@@ -1,0 +1,11 @@
+{
+  "model": "mlx-community/Qwen2.5-7B-Instruct-4bit",
+  "backend": "mlx",
+  "quant": "4bit",
+  "mode": "sgr",
+  "n_cases": 330,
+  "confidence_signal": "logprob",
+  "temperature": 0,
+  "corpus": "cases_mvp_v2 + data/calib330_cases.json",
+  "notes": "headline=295, blind=35; calib on p_chosen; raw/mlx_community_Qwen2.5_7B_Instruct_4bit.jsonl"
+}
